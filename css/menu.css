@@ -1,0 +1,195 @@
+
+:root {
+    --menu-speed: 0.75s
+}
+
+/* ------------------------------------ Menu Item ------------------------------------ */
+.menu-wrap {
+    position: fixed;
+    top: 10px;
+    right: 40px;
+    z-index: 1000;
+}
+
+/* ------------------------------------ hidden Check box ------------------------------------ */
+.menu-wrap .toggler {
+    position: fixed;
+    top: 10px;
+    right: 40px;
+
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    opacity: 0;
+    z-index: 2000;
+
+    display: none;
+}
+
+/* ------------------------------------ Hamburger menu ------------------------------------ */
+.menu-wrap .hamburger {
+    position: fixed;
+    top: 10px;
+    right: 40px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 40px;
+    height: 40px;
+
+    background-color: var(--bkg);
+    border-radius: 5px;
+
+    z-index: 1500;
+
+    display: none;
+}
+
+.menu-wrap .hamburger-middle-line {
+    position: relative;
+
+    width: 60%;
+    height: 2px;
+
+    background-color: var(--primary);
+
+    transition: all 0.4s ease;
+}
+
+/* Top and Bottom Hamburger line */
+.menu-wrap .hamburger-middle-line::before, 
+.menu-wrap .hamburger-middle-line::after {
+    
+    content: '';
+    position: absolute;
+    top: -7px;
+    left: 0;
+
+    width: 100%;
+    height: 2px;
+
+    background-color: var(--primary);
+}
+
+/* Moves Bottom Hamburger line down */
+.menu-wrap .hamburger-middle-line::after {
+    top: 7px;
+}
+
+/* ------------------------------------ Hamburger Animations ------------------------------------ */
+/* Make middle line form the first left line */
+.menu-wrap .toggler:checked + .hamburger > .hamburger-middle-line {
+    transform: rotate(135deg);
+}
+
+/* Make top and bpttom to fomr the right left line */
+.menu-wrap .toggler:checked + .hamburger > .hamburger-middle-line::before,
+.menu-wrap .toggler:checked + .hamburger > .hamburger-middle-line::after {
+
+    top: 0;
+    transform: rotate(90deg);
+}
+
+/* Totate when hovered over the check state. */
+.menu-wrap .toggler:checked:hover + .hamburger > .hamburger-middle-line {
+    transform: rotate(225deg);
+}
+
+/* ------------------------------------ Links Section ------------------------------------ */
+
+.menu-wrap .menu-links {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    z-index: 1000;
+
+    visibility: hidden;
+    overflow: hidden;
+}
+
+.menu-wrap .menu-links-overlay {
+    background-color: var(--bkg-overlay);
+    border-radius: 50%;
+
+    /* Both are set to width to have the circle effect */
+    width: 200vw;
+    height: 200vw;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* This is done to avoid oval effect */
+    flex: none;
+
+    transform: scale(0);
+    transition: all 0.4s ease;
+}
+
+.menu-wrap .menu-links-content {
+    text-align: center;
+    max-width: 90vw;
+    max-height: 100vh;
+    opacity: 0;
+    transform: opacity 0.4s all;
+}
+
+.menu-wrap .menu-links-content ul {
+    list-style: none;
+    padding: 0;
+}
+
+.menu-wrap .menu-links-content ul li {
+    padding: 20px;
+    color: var(--neutral);
+}
+
+.menu-wrap .menu-links-content ul li a {
+    color: inherit;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 3px;
+
+    transition: color 0.4s ease;
+}
+
+/* Animations */
+.menu-wrap .toggler:checked ~ .menu-links {
+    visibility: visible;
+}
+
+.menu-wrap .toggler:checked ~ .menu-links > .menu-links-overlay {
+    transform: scale(1);
+    transition-duration: var(--menu-speed);
+}
+
+.menu-wrap .toggler:checked ~ .menu-links > .menu-links-overlay > .menu-links-content {
+    opacity: 1;
+    transition: opacity 0.4s ease;
+}
+
+/* -------------------------- Media Queries ------------------------------ */
+@media screen and (max-width: 1000px) {
+    .nav-links {
+        display: none;
+    }
+
+    .menu-wrap .toggler {
+        display: block;
+    }
+    
+    .menu-wrap .hamburger {
+        display: flex;
+    }   
+}
